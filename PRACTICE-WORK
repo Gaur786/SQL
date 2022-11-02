@@ -1,3 +1,6 @@
+Bank_detail DataSet : https://archive.ics.uci.edu/ml/datasets/bank+marketing
+
+
 show databases
 CREATE database if not exists ineuron_fsda
 use ineuron_fsda
@@ -260,7 +263,24 @@ select * from bank_details order by age asc
 
 
 
+
+----------------------------------------------------------------HomeWork Questions--------------------------------------------------------------------------------------
+
+with this data try to fine out sum of balance 
+1. Try to find out avarage of balance 
+2. try to find out who is having a min balance 
+3. try to find out who is having a mazxmim balance 
+4. try to prepare a list of all the person who is having loan 
+5. try to find out average balance for all the people whose job role is admin 
+6. try to find out a record  without job whose age is below 45 
+7. try to find out a record where education is primarty and person is jobless
+8. try to find of a record whose bank account is having a negative balance 
+9. try to find our a record who is not having house at all along with there balance 
+
+
+
 ------------------------------------------------------------------HomeWork Answers-------------------------------------------------------------------------------------
+
 
 select avg(balance) from bank_details
 
@@ -271,7 +291,6 @@ select  age,job,marital,pdays,max(balance) from bank_details
 select * from bank_details where loan = 'yes'
 
 select  avg(balance) from bank_details where job = 'admin'
-
 
 select * from bank_details where job = 'jobless' and age = 45
 
