@@ -152,3 +152,10 @@ select discount_flag , count(*) from sales1 group by discount_flag
 
 select count(*) from  sales1 where discount > 0 
 
+
+
+---------------------------------------------------------For  Pratical Work ScreeenShots Refer This Link------------------------------------------------------------------
+
+
+Doc Link: https://1drv.ms/w/s!ArWslVpyvny7fWC7FJhNssZHmkM?e=Obswd5
+
