@@ -284,17 +284,17 @@ with this data try to fine out sum of balance
 
 select avg(balance) from bank_details
 
-select  age,job,marital,pdays,min(balance) from bank_details
+select * from bank_details order by balance limit 1;
 
-select  age,job,marital,pdays,max(balance) from bank_details
+select * from bank_details order by balance desc limit 1;
 
 select * from bank_details where loan = 'yes'
 
-select  avg(balance) from bank_details where job = 'admin'
+select  avg(balance) from bank_details where job = 'admin.'
 
 select * from bank_details where job = 'jobless' and age = 45
 
-select  education, job from bank_details where job = 'jobless' and education = 'primary'    
+select * from bank_details where job = 'jobless' and education = 'primary'    
 
 select * from bank_details where balance < 0
 
