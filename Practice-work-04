@@ -31,3 +31,115 @@ return final_profit;
 end $$
 
 select profit, discount, Final_profit(profit, discount) from sales1;
+
+
+----------------------------------------------Using 3 Parameter in the UDF---------------------------------------------------------------------------------
+
+Delimiter $$
+create function Final_Profit_Real( profit decimal(20,6) , discount decimal(20,6) , sales decimal(20,6))
+returns int 
+DETERMINISTIC
+begin
+declare final_profit_real int;
+set final_profit_real = profit - sales * discount;
+return final_profit_real;
+end $$ 
+
+select profit, discount, sales, Final_Profit_Real(profit,discount,sales) from sales1;
+
+------------------------------Converting Interger To String Using UDF--------------------------------------------------------------------------------------
+Delimiter $$
+create function int_to_str( a int)
+returns varchar(50)
+DETERMINISTIC
+begin
+declare b varchar(50);
+set b = a;
+return b;
+end $$ 
+
+select int_to_str(45)
+
+---------------------------------------------------creating a UDF using conditonal statement---------------------------------------------------------------
+Delimiter $$
+create function mark_sales(sales int)
+returns Varchar(50)
+Deterministic
+begin
+declare flag_sales varchar(50);
+if sales <= 100 then
+	set flag_sales = "Super Affordable Product";
+elseif sales > 100 and sales <= 300 then
+		set flag_sales = 'Affordable';
+elseif sales > 300 and sales <=600 then
+		set flag_sales = 'Moderate Product';
+else
+	set flag_sales = "Expensive";
+end if;
+return flag_sales;
+end $$    
+
+select sales, mark_sales(sales) from sales1;
+
+----------------------------------------------------Adding a mark_sales column in the sales1 table---------------------------------------------------------
+
+alter table sales1
+add column flag_sales varchar(50) after sales;
+
+
+
+update sales1
+set flag_sales= mark_sales(sales);
+set SQL_SAFE_UPDATES = 0;
+
+
+
+select * from sales1;
+
+-------------------------------------------------------------loops in SQL----------------------------------------------------------------------------------
+
+
+
+create table loop_table(val int);
+
+Delimiter $$
+create procedure insert_data()
+begin
+set @var = 10;
+generate_data : loop
+insert into loop_table values (@var);
+set @var = @var + 1 ;
+if @var = 100 then
+	leave generate_data ;
+end if;    
+end loop generate_data ;
+end$$
+
+select * from loop_table;
+
+call insert_data();
+
+------------------------------------------------Only those number which are divisible by 3-----------------------------------------------------------------
+
+
+create table loop_table1(val int);
+delimiter $$
+create procedure div_by_3()
+begin
+set @var = 10;
+generate_data : loop
+if(@var % 3 ) = 0 then
+	set @var = @var + 1;
+	insert into loop_table1 values(@var);
+    if @var = 100 then
+		leave generate_data ;
+    end if;
+end if;
+end loop generate_data ;
+end $$    
+
+
+call div_by_3();
+
+
+select * from loop_table1;
