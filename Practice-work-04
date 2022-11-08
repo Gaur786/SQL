@@ -1,0 +1,19 @@
+use sales;
+
+select * from sales1;
+
+#------------------------------------------Creating User Defined Function----------------------------------------------------------------------------------
+Delimiter $$
+create function add_to_col( a int)
+returns int
+DETERMINISTIC
+BEGIN
+	declare b int;
+    set b = a + 10;
+    return b;
+end $$    
+
+#-------------------------------------------------------Using UDF-------------------------------------------------------------------------------------------
+
+select quantity, add_to_col(quantity) from sales1;
+
