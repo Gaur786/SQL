@@ -17,3 +17,17 @@ end $$
 
 select quantity, add_to_col(quantity) from sales1;
 
+
+#----------------------------------------------------Creating Our Own UDF function-------------------------------------------------------------------------
+
+delimiter $$
+create function Final_Profit( profit int , discount int)
+returns int
+DETERMINISTIC
+begin
+declare final_profit int ;
+set final_profit = profit - discount;
+return final_profit;
+end $$
+
+select profit, discount, Final_profit(profit, discount) from sales1;
